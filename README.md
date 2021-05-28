@@ -1,28 +1,50 @@
-# deploy-code-server 🚀
+# Guide: Launching `code-server` on railway.app
 
-A collection of one-click buttons and scripts for deploying [code-server](https://github.com/cdr/code-server) to various cloud hosting platforms. The fastest way to get a code-server environment! ☁️
+[Railway](https://railway.app) is a new cloud development platform! ☁️
 
-|                                                                                                                 | Name              | Type          | Lowest-Price Plan                     | Deploy                                                  |
-| --------------------------------------------------------------------------------------------------------------- | ----------------- | ------------- | ------------------------------------- | ------------------------------------------------------- |
-| [![DigitalOcean](img/logo/digitalocean.png)](https://digitalocean.com)                                          | DigitalOcean      | VM            | $5/mo, 1 CPU, 1 GB RAM                | [see guide](guides/digitalocean.md)                     |
-| [![Vultr](img/logo/vultr.png)](https://vultr.com)                                                               | Vultr             | VM            | $3.50/mo, 1 CPU, 512 MB RAM           | coming soon                                             |
-| [![Linode](img/logo/linode.png)](https://linode.com)                                                            | Linode            | VM            | $5/mo, 1 CPU, 1 GB RAM                | [see guide](guides/linode.md)                           |
-| [![Railway](img/logo/railway.png)](https://railway.app)                                                         | Railway           | Container     | Free, specs unknown, but very fast 🚀 | [see guide](guides/railway.md)                          |
-| [![Heroku](img/logo/heroku.png)](https://heroku.com)                                                            | Heroku            | Container     | Free, 1 CPU, 512 MB RAM               | [see guide](guides/heroku.md)                           |
-| [![Azure App Service](img/logo/azure-app-service.png)](https://azure.microsoft.com/en-us/services/app-service/) | Azure App Service | Container     | Free, 1 CPU, 1 GB RAM                 | [see guide](https://github.com/bpmct/code-server-azure) |
-| [![Coder](img/logo/coder.png)](https://coder.com/docs)                                                          | Coder             | Dev Workspace | For developer teams 👨🏼‍💻                | [read the docs](https://coder.com/docs)                 |
+Use Railway + code-server to get a dev environment that you can access from any device.
+
+![code-server and railway.app](./img/code-server-railway.png)
+
+## Step 1: Click button to deploy
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https%3A%2F%2Fgithub.com%2Fcdr%2Fdeploy-code-server&envs=PASSWORD%2CGIT_REPO&PASSWORDDesc=Your+password+to+log+in+to+code-server+with&GIT_REPODesc=A+git+repo+to+clone+and+open+in+code-server+%28ex.+https%3A%2F%2Fgithub.com%2Fcdr%2Fdocs.git%29)
+
+## Step 2: Configure & launch your environment
+
+You'll need to make a new repository which will contain your code-server configuration. If you push changes to this repo (to install NodeJS, for example), it will re-deploy code-server.
+
+<img src="./img/launch-railway.gif" alt="Connected git repo" width="650" />
+
+You also need to specity a `PASSWORD` and a `GIT_REPO` to clone in your environment :)
+
+## Step 3: Modify your environment to add additional tools
+
+1. In Railway, go to `Deployments -> Triggers` to see your source repo.
+
+   <img src="./img/railway-connected.png" alt="Connected git repo" width="400" />
+
+1. Open the source repo in GitHub and edit the `Dockerfile`
+1. Add some custom tools (like NodeJS) and push to the main branch:
+
+   ```Dockerfile
+   # You can add custom software and dependencies for your environment here. Some examples:
+
+   # RUN code-server --install-extension esbenp.prettier-vscode
+   # RUN sudo apt-get install -y build-essential
+   # RUN COPY myTool /home/coder/myTool
+
+   # Install NodeJS
+   RUN sudo curl -fsSL https://deb.nodesource.com/setup_15.x | sudo bash -
+   RUN sudo apt-get install -y nodejs
+   ```
+
+1. Head back to Railway and notice a new deployment was created. After it has completed, you can use these tools in your environment.
+
+1. (Optional): [Configure rclone](https://github.com/cdr/deploy-code-server/tree/main/deploy-container#-persist-your-filesystem-with-rclone) so that you can save your VS Code config and files without commiting
+
+See the [deploy-container README](../deploy-container) for other config vars for your environment.
 
 ---
 
-## code-server on a VM vs. a Container
-
-- VMs are deployed once, and then can be modified to install new software
-  - You need to save "snapshots" to use your latest images
-  - Storage is always persistent, and you can usually add extra volumes
-  - VMs can support many workloads, such as running Docker or Kubernetes clusters
-  - [👀 Docs for the VM install script](deploy-vm/)
-- Deployed containers do not persist, and are often rebuilt
-  - Containers can shut down when you are not using them, saving you money
-  - All software and dependencies need to be defined in the `Dockerfile` or install script so they aren't destroyed on a rebuild. This is great if you want to have a new, clean environment every time you code
-  - Storage may not be redundant. You may have to use [rclone](https://rclone.org/) to store your filesystem on a cloud service, for info:
-- [📄 Docs for code-server-deploy-container](deploy-container/)
+To update your code-server version, modify the version number on line 2 in your Dockerfile. See the [list of tags](https://hub.docker.com/r/codercom/code-server/tags?page=1&ordering=last_updated) for the latest version.
