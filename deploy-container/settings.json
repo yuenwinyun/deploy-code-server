@@ -3,5 +3,69 @@
   "git.postCommitCommand": "sync",
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
-  "git.autofetch": true
+  "git.autofetch": true,
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "git.rebaseWhenSync": true,
+  "diffEditor.renderSideBySide": false,
+  "explorer.confirmDelete": false,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "terminal.integrated.rendererType": "dom",
+  "extensions.ignoreRecommendations": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.tabSize": 4
+  },
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "editor.fontFamily": "Monaco, Ubuntu Mono, Menlo, 'Courier New', monospace",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 4
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.productIconTheme": "icons-carbon",
+  "workbench.iconTheme": "vscode-icons",
+  "projectManager.git.baseFolders": ["/home/coder/project"],
+  "vetur.format.defaultFormatter.stylus": "none",
+  "gitlens.advanced.messages": {
+    "suppressImproperWorkspaceCasingWarning": true
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "matklad.rust-analyzer"
+  },
+  "workbench.editorAssociations": [
+    {
+      "viewType": "vscode.markdown.preview.editor",
+      "filenamePattern": "*.md"
+    }
+  ],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.formatOnSave": true
 }
