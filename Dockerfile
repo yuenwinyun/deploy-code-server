@@ -38,7 +38,7 @@ RUN for extension in $(cat extensions); do code-server --install-extension $exte
 # -----------
 
 RUN sudo curl -fsSL https://deb.nodesource.com/setup_15.x | sudo bash -
-RUN sudo apt-get install -y nodejs && sudo npm -g install yarn
+RUN sudo apt-get install -y nodejs && sudo npm -g install yarn pnpm
 
 COPY deploy-container/.bash_aliases .
 
