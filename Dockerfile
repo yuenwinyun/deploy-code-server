@@ -25,7 +25,9 @@ RUN sudo mkdir project && sudo chown -R coder:coder /home/coder/project
 
 # Install a VS Code extension:
 # Note: we use a different marketplace than VS Code. See https://github.com/cdr/code-server/blob/main/docs/FAQ.md#differences-compared-to-vs-code
-# RUN code-server --install-extension esbenp.prettier-vscode
+
+COPY deploy-container/extensions .
+RUN for extension in $(cat extensions); do code-server --install-extension $extension; done
 
 # Install apt packages:
 # RUN sudo apt-get install -y ubuntu-make
