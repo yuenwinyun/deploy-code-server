@@ -23,6 +23,14 @@ RUN sudo mkdir project && sudo chown -R coder:coder /home/coder/project
 # You can add custom software and dependencies for your environment below
 # -----------
 
+# Install terraform and vault
+RUN sudo apt-get update && sudo apt-get install software-properties-common
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+RUN sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+RUN sudo apt-get update && sudo apt-get install terraform vault -y
+
+# -----------
+
 # Install a VS Code extension:
 # Note: we use a different marketplace than VS Code. See https://github.com/cdr/code-server/blob/main/docs/FAQ.md#differences-compared-to-vs-code
 
