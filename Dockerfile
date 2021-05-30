@@ -24,10 +24,11 @@ RUN sudo mkdir project && sudo chown -R coder:coder /home/coder/project
 # -----------
 
 # Install terraform
-RUN sudo apt-get update && sudo apt-get install software-properties-common -y
+RUN sudo apt-get update && sudo apt-get install software-properties-common gnupg2 -y
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 RUN sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 RUN sudo apt-get update && sudo apt-get install terraform -y
+RUN sudo apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # -----------
 
