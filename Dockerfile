@@ -21,5 +21,5 @@ RUN sudo apt-get update && \
     sudo npm -g install yarn pnpm && \
     sudo apt-get clean
 
-ENV PORT=8080
+ENV PORT=80
 ENTRYPOINT ["/usr/bin/deploy-container-entrypoint.sh"]
