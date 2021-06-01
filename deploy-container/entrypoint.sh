@@ -11,6 +11,12 @@ init_git() {
     git config --global user.email $GIT_EMAIL
 }
 
+install_vscode_extensions() {
+    for extension in $(cat /home/coder/extensions); do
+      code-server --install-extension $extension
+    done;
+}
+
 # function to clone the git repo or add a user's first file if no repo was specified.
 project_init () {
     [ -z "${GIT_REPO}" ] && echo "[$PREFIX] No GIT_REPO specified" && echo "Example file. Have questions? Join us at https://community.coder.com" > $START_DIR/coder.txt || git clone $GIT_REPO $START_DIR
@@ -85,6 +91,10 @@ echo "[$PREFIX] Config git"
 
 init_git
 
+echo "[$PREFIX] Installing vscode extensions"
+
+install_vscode_extensions
+
 echo "[$PREFIX] Starting code-server..."
 # Now we can run code-server with the default entrypoint
-/usr/bin/entrypoint.sh --bind-addr 0.0.0.0:8080 $START_DIR
+/usr/bin/entrypoint.sh --bind-addr 0.0.0.0:80 $START_DIR
