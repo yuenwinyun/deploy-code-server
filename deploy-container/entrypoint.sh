@@ -93,7 +93,7 @@ init_git
 
 echo "[$PREFIX] Installing vscode extensions"
 
-install_vscode_extensions
+install_vscode_extensions&
 
 echo "[$PREFIX] Starting code-server..."
 # Now we can run code-server with the default entrypoint
