@@ -97,4 +97,4 @@ install_vscode_extensions
 
 echo "[$PREFIX] Starting code-server..."
 # Now we can run code-server with the default entrypoint
-/usr/bin/entrypoint.sh --bind-addr 0.0.0.0:80 $START_DIR
+/usr/bin/entrypoint.sh --bind-addr 0.0.0.0:8080 $START_DIR
