@@ -1,5 +1,4 @@
 {
-  "workbench.colorTheme": "Default Dark+",
   "git.postCommitCommand": "sync",
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
@@ -39,7 +38,6 @@
     "editor.tabSize": 4
   },
   "typescript.disableAutomaticTypeAcquisition": true,
-  "editor.fontFamily": "Monaco, Ubuntu Mono, Menlo, 'Courier New', monospace",
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 4
@@ -50,15 +48,11 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.productIconTheme": "icons-carbon",
   "workbench.iconTheme": "vscode-icons",
   "projectManager.git.baseFolders": ["/home/coder/project"],
   "vetur.format.defaultFormatter.stylus": "none",
   "gitlens.advanced.messages": {
     "suppressImproperWorkspaceCasingWarning": true
-  },
-  "[rust]": {
-    "editor.defaultFormatter": "matklad.rust-analyzer"
   },
   "workbench.editorAssociations": [
     {
@@ -67,5 +61,6 @@
     }
   ],
   "diffEditor.ignoreTrimWhitespace": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "workbench.colorTheme": "Darcula"
 }

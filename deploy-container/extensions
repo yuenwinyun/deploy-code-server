@@ -1,7 +1,5 @@
-4ops.terraform
 aaron-bond.better-comments
 alefragnani.project-manager
-bbenoist.vagrant
 bradlc.vscode-tailwindcss
 christian-kohler.npm-intellisense
 christian-kohler.path-intellisense
@@ -9,7 +7,6 @@ codezombiech.gitignore
 CoenraadS.bracket-pair-colorizer
 dbaeumer.vscode-eslint
 donjayamanne.githistory
-eamodio.gitlens
 EditorConfig.EditorConfig
 emmanuelbeziat.vscode-great-icons
 esbenp.prettier-vscode
@@ -18,15 +15,11 @@ gamunu.vscode-yarn
 hashicorp.terraform
 humao.rest-client
 Hyzeta.vscode-theme-github-light
-jock.svg
 kevinkyang.auto-comment-blocks
-matklad.rust-analyzer
 msjsdiag.debugger-for-chrome
 octref.vetur
 oderwat.indent-rainbow
-PKief.material-icon-theme
 pnp.polacode
-qinjia.seti-icons
 raynigon.nginx-formatter
 redhat.vscode-yaml
 rokoroku.vscode-theme-darcula

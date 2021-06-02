@@ -4,23 +4,27 @@ USER coder
 ENV SHELL=/bin/bash
 
 COPY deploy-container/settings.json .local/share/code-server/User/settings.json
-COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
-COPY deploy-container/extensions deploy-container/.bash_aliases ./
 COPY deploy-container/entrypoint.sh /usr/bin/deploy-container-entrypoint.sh
+COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
+COPY ["deploy-container/entrypoint.sh", "deploy-container/extensions", "deploy-container/.bash_aliases",  "./"]
 
 RUN sudo chown -R coder:coder /home/coder/.local
 RUN sudo mkdir project && sudo chown -R coder:coder /home/coder/project
 
-RUN sudo apt-get update && sudo apt-get install software-properties-common gnupg2 unzip vim -y
-RUN curl -fsSL https://deb.nodesource.com/setup_15.x | sudo bash -
+# Install nvm, yarn and pnpm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+RUN /bin/bash -c "source .nvm/nvm.sh && nvm install 16 && npm -g install yarn pnpm" 
+
+# Install rclone
+RUN sudo apt-get update && sudo apt-get install unzip -y
 RUN curl https://rclone.org/install.sh | sudo bash -
 
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-RUN sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-RUN sudo apt-get update && \
-    sudo apt-get install nodejs terraform -y && \
-    sudo npm -g install yarn pnpm && \
-    sudo apt-get clean
+# Install terraform and rclone
+ENV TERRAFORM_VERSION=0.15.4
+
+ADD --chown=coder:coder https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip terraform.zip
+RUN sudo unzip -q ./terraform.zip -d /usr/bin && \
+    sudo rm terraform.zip
 
 ENV PORT=8080
 ENTRYPOINT ["/usr/bin/deploy-container-entrypoint.sh"]
