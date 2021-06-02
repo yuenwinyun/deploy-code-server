@@ -44,14 +44,16 @@ execute_rclone_scripts() {
     echo "rclone sync $RCLONE_REMOTE_PATH $RCLONE_SOURCE_PATH $RCLONE_FLAGS --exclude **/node_modules/** -vv" >/home/coder/pull_remote.sh
     chmod +x push_remote.sh pull_remote.sh
 
-    if [ $RCLONE_AUTO_PULL = "true" ]; then
-        echo "[$PREFIX] Pulling existing files from remote..."
-        /home/coder/pull_remote.sh &
-    fi
-
-    if [ $RCLONE_AUTO_PUSH = "true" ]; then
-        echo "[$PREFIX] Pushing initial files to remote..."
-        /home/coder/push_remote.sh &
+    if rclone ls $RCLONE_REMOTE_PATH; then
+        if [ $RCLONE_AUTO_PULL = "true" ]; then
+            echo "[$PREFIX] Pulling existing files from remote..."
+            /home/coder/pull_remote.sh &
+        fi
+    else
+        if [ $RCLONE_AUTO_PUSH = "true" ]; then
+            echo "[$PREFIX] Pushing initial files to remote..."
+            /home/coder/push_remote.sh &
+        fi
     fi
 }
 
