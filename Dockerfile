@@ -1,17 +1,18 @@
 FROM codercom/code-server:3.10.2
 
 USER coder
-ENV TERRAFORM_VERSION=0.15.4
 
-RUN sudo chown -R coder:coder /home/coder/.local
+ENV TERRAFORM_VERSION=0.15.4
 
 COPY deploy-container/settings.json .local/share/code-server/User/settings.json
 COPY deploy-container/entrypoint.sh /usr/bin/deploy-container-entrypoint.sh
 COPY deploy-container/rclone-tasks.json /tmp/rclone-tasks.json
 COPY ["deploy-container/entrypoint.sh", "deploy-container/extensions", "deploy-container/.bash_aliases",  "./"]
 
+RUN sudo chown -R coder:coder /home/coder/.local
+
 # Install vscode extensions
-RUN for extension in $(cat extensions); do code-server --install-extension $extension done
+RUN for extension in $(cat extensions); do code-server --install-extension $extension; done
 
 # Install nvm, yarn and pnpm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
