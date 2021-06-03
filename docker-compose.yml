@@ -8,3 +8,4 @@ services:
       - GIT_USERNAME
       - GIT_EMAIL
       - RCLONE_DATA
+      - START_DIR
