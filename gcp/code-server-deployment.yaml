@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: code-server-deployment
+spec:
+  selector:
+    matchLabels:
+      app: code-server
+  template:
+    metadata:
+      labels:
+        app: code-server
+    spec:
+      containers:
+        - name: code-server
+          image: gcr.io/united-helix-312314/philfish/code-server:4
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PASSWORD
+              value: "123456"
+#      imagePullSecrets:
+#        - name:
+
+# TODO: enable https
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-server-deployment
+  labels:
+    run: code-server-deployment
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    run: code-server-deployment
